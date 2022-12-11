@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin Library</title>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form action="" method="get" name="add-book" class="new-book-form">
+            <div class="title">
+                <label for="title">Title:</label>
+                <input id="title" type="text" name="title" placeholder="IT">
+            </div>
+            <div class="author">
+                <label for="author">Author:</label>
+                <input id="author" type="text" name="author" placeholder="Stephan Hawking">
+            </div>
+            <div class="pages">
+                <label for="pages">Pages:</label>
+                <input id="pages" type="text" name="pages" placeholder="200">
+            </div>
+            <div class="status">
+                <fieldset>
+                    <legend>Select status:</legend>
+                    <div>
+                        <input id="finished" type="radio" name="status" value="Finished"> </input>
+                        <label for="finished">Finished</label>
+                    </div>
+                    <div>
+                        <input id="reading" type="radio" name="status" value="Reading"> </input>
+                        <label for="reading">Reading</label>
+                    </div>
+                    <div>
+                        <input id="plan-to-read" type="radio" name="status" value="I plan to read it"> </input>
+                        <label for="plan-to-read">I plan to read it</label>
+                    </div>
+                </fieldset>
+
+            </div>
+            <button id="submit-button" type="button">Add to Library</button>
+        </form>
+        <div class="myLibrary">
+            <div class="books">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
