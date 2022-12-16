@@ -46,10 +46,12 @@ function printLibrary() {
             const remove = document.createElement('button');
             const edit = document.createElement('button');
             const commentButton = document.createElement('button');
+            const commentDiv = document.createElement('div');
 
             bookCard.classList.add('book-card');
             bookCard.setAttribute('data-index-number', `${myLibrary.length}`);
-            cardButtons.classList.add('card-buttons')
+            cardButtons.classList.add('card-buttons');
+            cardData.classList.add('card-data')
             remove.classList.add('remove');
             remove.setAttribute('type','button');
             remove.innerHTML = 'Remove';
@@ -73,14 +75,18 @@ function printLibrary() {
 
             bookCard.appendChild(cardButtons);
             cardButtons.appendChild(edit);
-            cardButtons.appendChild(commentButton);
+            cardButtons.appendChild(commentDiv);
+            commentDiv.appendChild(commentButton);
             cardButtons.appendChild(remove);
            
             
             edit.addEventListener('click', ()=>showEditForm(position));
-            commentButton.addEventListener('click', ()=>addComment(position, cardData, cardButtons,commentButton))
             remove.addEventListener('click', ()=>removeCard(position));
+            commentButton.addEventListener('click', ()=>addComment(position, cardData, cardButtons, commentButton, commentDiv))
             printedBooks.push(position);
+            if(typeof position.comment === 'string' && position.comment.length !== 0){
+                comment(position, cardData, cardButtons,commentButton, commentDiv);
+            }
         }
 
 
@@ -103,8 +109,12 @@ function removeCard(position){
     }), 1);
     reloadLibrary();
 }
-function addComment(position, cardData, cardButtons,commentButton){
+function addComment(position, cardData, cardButtons,commentButton, commentDiv){
     if(!position.hasOwnProperty('comment')){
+        comment(position, cardData, cardButtons, commentButton, commentDiv);
+    }
+} 
+function comment(position, cardData, cardButtons,commentButton, commentDiv){
     const commentArea = document.createElement('textarea');
     const commentLabel = document.createElement('label');
     commentLabel.innerHTML = 'Comment:';
@@ -113,19 +123,21 @@ function addComment(position, cardData, cardButtons,commentButton){
     commentArea.setAttribute('placeholder', 'Add comment...');
     commentArea.setAttribute('rows', '3');
     commentArea.setAttribute('maxlength', '100');
-    position.comment = commentArea.value;
-    cardData.appendChild(commentArea);
-    cardButtons.removeChild(commentButton);
-    const saveButton = document.createElement('button');
-    saveButton.setAttribute('type', 'button');
-    saveButton.innerHTML = 'Save comment';
-    cardButtons.appendChild(saveButton);
-
-    saveButton.addEventListener('click', ()=>{
-        position.comment = commentArea.value;
-    })
+    if(typeof position.comment === 'string' && position.comment.length !== 0){
+        commentArea.value = position.comment;   
     }
-} 
+    cardData.appendChild(commentArea);
+    commentDiv.removeChild(commentButton);   
+    const saveCommentButton = document.createElement('button');
+    saveCommentButton.setAttribute('type', 'button');
+    saveCommentButton.innerHTML = 'Save comment';
+    commentDiv.appendChild(saveCommentButton);
+
+    saveCommentButton.addEventListener('click', ()=>{
+        position.comment = commentArea.value;
+
+    })
+}
 function showEditForm(position){
     editForm.classList.toggle("hide");
     saveButton.removeAttribute('disabled');
