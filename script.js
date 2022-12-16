@@ -32,30 +32,6 @@ const witcher = new Book('The Witcher', 'Andrzej Sapkowski', 237, 'Finished');
 myLibrary.push(witcher);
 const it = new Book('IT', 'King Stephen', 1376, 'I plan to read it');
 myLibrary.push(it);
-const metro1 = new Book('Metro 2033', 'Glukhovsky Dmitry', 592, 'I plan to read it');
-myLibrary.push(metro1);
-const lotr1 = new Book('Lord of the rings', 'J.R.R. Tolkien', 266, 'Finished');
-myLibrary.push(lotr1);
-const witcher1 = new Book('The Witcher', 'Andrzej Sapkowski', 237, 'Finished');
-myLibrary.push(witcher1);
-const it1 = new Book('IT', 'King Stephen', 1376, 'I plan to read it');
-myLibrary.push(it);
-const metro2 = new Book('Metro 2033', 'Glukhovsky Dmitry', 592, 'I plan to read it');
-myLibrary.push(metro2);
-const lotr2 = new Book('Lord of the rings', 'J.R.R. Tolkien', 266, 'Finished');
-myLibrary.push(lotr1);
-const witcher2 = new Book('The Witcher', 'Andrzej Sapkowski', 237, 'Finished');
-myLibrary.push(witcher2);
-const it2 = new Book('IT', 'King Stephen', 1376, 'I plan to read it');
-myLibrary.push(it2);
-const metro3 = new Book('Metro 2033', 'Glukhovsky Dmitry', 592, 'I plan to read it');
-myLibrary.push(metro3);
-const lotr3 = new Book('Lord of the rings', 'J.R.R. Tolkien', 266, 'Finished');
-myLibrary.push(lotr3);
-const witcher3 = new Book('The Witcher', 'Andrzej Sapkowski', 237, 'Finished');
-myLibrary.push(witcher3);
-const it3 = new Book('IT', 'King Stephen', 1376, 'I plan to read it');
-myLibrary.push(it3);
 
 
 
