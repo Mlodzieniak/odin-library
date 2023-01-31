@@ -1,7 +1,7 @@
 const booksDiv = document.querySelector('.books');
 document.getElementById('reading').checked = true;
 const submitButton = document.querySelector('#submit-button');
-
+const form = document.querySelector('form')
 const editForm = document.querySelector('.edit-book-form');
 const saveButton = document.querySelector('#save-changes-button');
 
@@ -152,18 +152,21 @@ function showEditForm(position){
 }
 
 submitButton.addEventListener('click', () => {
-    let titleInput = document.forms['add-book']['title'].value;
-    if (titleInput == '') {
-        alert('Must fill out form.');
-        return;
+    if(formVal()){
+        let titleInput = document.forms['add-book']['title'].value;
+        let authorInput = document.forms['add-book']['author'].value;
+        let pagesInput = parseInt(document.forms['add-book']['pages'].value);
+        let statusInput = document.forms['add-book']['status'].value;
+    
+        myLibrary.push(new Book(titleInput, authorInput, pagesInput, statusInput));
+        printLibrary();
+        document.forms['add-book'].reset();
     }
-    let authorInput = document.forms['add-book']['author'].value;
-    let pagesInput = parseInt(document.forms['add-book']['pages'].value);
-    let statusInput = document.forms['add-book']['status'].value;
-
-    myLibrary.push(new Book(titleInput, authorInput, pagesInput, statusInput));
-    printLibrary();
-    document.forms['add-book'].reset();
+})
+form.addEventListener('submit',(event)=>{
+    if(!form.validity.valid){
+        event.preventDefault()
+    }
 })
 saveButton.addEventListener('click', () =>{
     let titleEdit = document.forms['edit-book']['edit-title'].value;
@@ -178,4 +181,37 @@ saveButton.addEventListener('click', () =>{
     
     reloadLibrary();
 })
+// title.addEventListener('onchange', ()=>{
+//     if(title.validity.tooShort){
+//         title.setCustomValidity('Title is too short.')
+//         return false
+//     }else{
+//         title.setCustomValidity('')
+//         return true
+//     }
+// })
+function formVal(){
+    const title = document.getElementById('title')
+    const pagesCount = document.getElementById('pages')
+    const author = document.getElementById('author')
+    if(title.validity.tooShort){
+        title.setCustomValidity('Title is too short.')
+        
+    }else if(title.validity.valueMissing){
+        title.setCustomValidity('Please provide book title.')
+    }else if(author.validity.valueMissing){
+        author.setCustomValidity('Who is the author?.')
+    }else if(author.validity.patternMismatch){
+        author.setCustomValidity('Provide name and surname.')
+    }else if(pagesCount.validity.valueMissing){
+        pagesCount.setCustomValidity('Please provide how many pages book has.')
+    }else if(pagesCount.validity.rangeOverflow){
+        pagesCount.setCustomValidity('Provided number is too big.')
+    }
+    else{
+        title.setCustomValidity('')
+        return true
+    }
+
+}
 printLibrary();
